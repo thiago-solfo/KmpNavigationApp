@@ -1,10 +1,15 @@
+## Grupo
+- Airton Borges de Souza
+- Carlos Everaldo Teixeira Santos
+- Thiago Marinho Solfo
+
 ### Buildar e executar a aplicação Android
 
-- on macOS/Linux
+- macOS/Linux
   ```shell
   ./gradlew :composeApp:assembleDebug
   ```
-- on Windows
+- Windows
   ```shell
   .\gradlew.bat :composeApp:assembleDebug
   ```
