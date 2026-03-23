@@ -1,21 +1,5 @@
-This is a Kotlin Multiplatform project targeting Android, iOS.
+### Buildar e executar a aplicação Android
 
-* [/composeApp](./composeApp/src) is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - [commonMain](./composeApp/src/commonMain/kotlin) is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    the [iosMain](./composeApp/src/iosMain/kotlin) folder would be the right place for such calls.
-    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./composeApp/src/jvmMain/kotlin)
-    folder is the appropriate location.
-
-* [/iosApp](./iosApp/iosApp) contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform,
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
-
-### Build and Run Android Application
-
-To build and run the development version of the Android app, use the run configuration from the run widget
-in your IDE’s toolbar or build it directly from the terminal:
 - on macOS/Linux
   ```shell
   ./gradlew :composeApp:assembleDebug
@@ -25,11 +9,17 @@ in your IDE’s toolbar or build it directly from the terminal:
   .\gradlew.bat :composeApp:assembleDebug
   ```
 
-### Build and Run iOS Application
+### Buildar e executar a aplicação iOS
 
-To build and run the development version of the iOS app, use the run configuration from the run widget
-in your IDE’s toolbar or open the [/iosApp](./iosApp) directory in Xcode and run it from there.
+Para compilar e executar a versão de desenvolvimento do aplicativo iOS, use a configuração de execução do widget de execução
+na barra de ferramentas do seu IDE ou abra o diretório [/iosApp](./iosApp) no Xcode e execute-o a partir daí.
 
----
+## Resposta à Questão Teórica
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+No modelo Multi-Activity do Android cada tela é geralmente uma Activity separada e a navegação é feita pelo sistema (Intents). Já no modelo Single Activity com Compose a gente só tem uma Activity que mostra telas diferentes trocando os composables, então a navegação fica dentro do app.
+
+Na prática isso quer dizer que, se a navegação e as telas estiverem em `commonMain`, fica bem mais fácil reaproveitar o código entre Android e iOS — você escreve a maior parte uma vez só. No modelo Multi-Activity isso tende a ficar preso ao Android e dá mais trabalho para compartilhar.
+
+Ainda assim, algumas coisas são específicas de cada plataforma (por exemplo, o botão físico de voltar, deep links ou APIs nativas) e precisam de código separado.
+
+Single Activity + navegação em `commonMain` facilita o reaproveitamento entre plataformas.
